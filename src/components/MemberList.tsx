@@ -9,8 +9,8 @@ import { UnitOutlinedLogoMap } from "../utils/resources";
 
 const useStyle = makeStyles((theme) => ({
   unitIcon: {
-    [theme.breakpoints.down("sm")]: {
-      height: "48px",
+    [theme.breakpoints.down("md")]: {
+      height: "72px",
     },
     height: "96px",
   },
