@@ -37,9 +37,9 @@ const MemberList: React.FC<{ contentTransMode: ContentTransModeType }> = ({
       <Typography variant="h6" className={layoutClasses.header}>
         {t("common:member")}
       </Typography>
-      <Grid container spacing={1} direction="column">
+      <Grid container spacing={8} direction="column">
         {units.map(({ id, characters }) => (
-          <Grid key={"unit-" + id} item container justify="center" spacing={1}>
+          <Grid key={"unit-" + id} item container justify="center" spacing={2}>
             <Grid item container justify="center">
               <img
                 className={classes.unitIcon}
@@ -47,9 +47,9 @@ const MemberList: React.FC<{ contentTransMode: ContentTransModeType }> = ({
                 alt={id}
               ></img>
             </Grid>
-            <Grid item container justify="center" spacing={2}>
+            <Grid item container justify="center" spacing={1}>
               {characters.map((i) => (
-                <Grid key={`chara-${i}`} item xs={4} md={2}>
+                <Grid key={`chara-${i}`} item xs={3} md={2}>
                   <Link to={path + "/" + i} style={{ textDecoration: "none" }}>
                     <img
                       className={classes.memberSelectImg}
