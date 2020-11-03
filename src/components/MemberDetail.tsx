@@ -28,6 +28,89 @@ import { UnitLogoMap } from "../utils/resources";
 import { CardThumb } from "./subs/CardThumb";
 // import { useAssetI18n } from "../utils/i18n";
 
+const profileItems = [
+  // t(...) comments are written for i18next-parser (i18next)
+  // do NOT delete them, or i18next will not extract keys anymore.
+  {
+    // t("member:height")
+    caption: "member:height",
+    key: "height",
+  },
+  {
+    // t("member:birthday")
+    caption: "member:birthday",
+    key: "birthday",
+  },
+  {
+    // t("member:characterVoice")
+    caption: "member:characterVoice",
+    key: "characterVoice",
+  },
+  {
+    // t("member:school")
+    caption: "member:school",
+    key: "school",
+  },
+  {
+    // t("member:schoolYear")
+    caption: "member:schoolYear",
+    key: "schoolYear",
+  },
+  {
+    // t("member:hobby")
+    caption: "member:hobby",
+    key: "hobby",
+  },
+  {
+    // t("member:specialSkill")
+    caption: "member:specialSkill",
+    key: "specialSkill",
+  },
+  {
+    // t("member:favoriteFood")
+    caption: "member:favoriteFood",
+    key: "favoriteFood",
+  },
+  {
+    // t("member:hatedFood")
+    caption: "member:hatedFood",
+    key: "hatedFood",
+  },
+  {
+    // t("member:weak")
+    caption: "member:weak",
+    key: "weak",
+  },
+  {
+    // t("member:introduction")
+    caption: "member:introduction",
+    key: "introduction",
+  },
+] as const;
+
+const colorItems = [
+  {
+    // t("member:colorCode")
+    caption: "member:colorCode",
+    key: "colorCode",
+  },
+  {
+    // t("member:skinColorCode")
+    caption: "member:skinColorCode",
+    key: "skinColorCode",
+  },
+  {
+    // t("member:skinShadowColorCode1")
+    caption: "member:skinShadowColorCode1",
+    key: "skinShadowColorCode1",
+  },
+  {
+    // t("member:skinShadowColorCode2")
+    caption: "member:skinShadowColorCode2",
+    key: "skinShadowColorCode2",
+  },
+] as const;
+
 const useStyle = makeStyles((theme) => ({
   tabpanel: {
     padding: theme.spacing("1%", 0, 0, 0),
@@ -93,13 +176,14 @@ const MemberDetail: React.FC<{ contentTransMode: ContentTransModeType }> = ({
           (cu) => cu.gameCharacterId === chara?.id && cu.unit === chara?.unit
         )
       );
+      // list support units if the character is a member of VIRTUAL SINGER
       if (chara?.unit === "piapro") {
         setCharaSupportUnits(
           charaUnits
             .filter(
               (cu) => cu.gameCharacterId === chara.id && cu.unit !== "piapro"
             )
-            .filter((cu) => charaCards.find((cc) => cc.supportUnit === cu.unit))
+            .filter((cu) => charaCards.some((cc) => cc.supportUnit === cu.unit))
         );
       }
       setCharaProfile(charaProfiles.find((cp) => cp.characterId === chara?.id));
@@ -248,130 +332,43 @@ const MemberDetail: React.FC<{ contentTransMode: ContentTransModeType }> = ({
             ></img>
           </Grid>
           <Divider style={{ margin: "1% 0" }} />
-          <Grid
-            container
-            direction="row"
-            wrap="nowrap"
-            justify="space-between"
-            alignItems="center"
-          >
-            <Grid item>
-              <Typography variant="subtitle1" style={{ fontWeight: 600 }}>
-                {t("member:colorCode")}
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Grid container spacing={1}>
-                <Grid item>
-                  <Typography>{charaUnit?.colorCode}</Typography>
+          {colorItems.map(({ caption, key }) =>
+            charaUnit[key] ? (
+              <Fragment key={"color-" + key}>
+                <Grid
+                  container
+                  direction="row"
+                  wrap="nowrap"
+                  justify="space-between"
+                  alignItems="center"
+                >
+                  <Grid item>
+                    <Typography variant="subtitle1" style={{ fontWeight: 600 }}>
+                      {t(caption)}
+                    </Typography>
+                  </Grid>
+                  <Grid item>
+                    <Grid container spacing={1}>
+                      <Grid item>
+                        <Typography>{charaUnit[key]}</Typography>
+                      </Grid>
+                      <Grid item>
+                        <div
+                          style={{
+                            height: "26px",
+                            width: "26px",
+                            border: "solid 2px white",
+                            backgroundColor: charaUnit[key],
+                          }}
+                        ></div>
+                      </Grid>
+                    </Grid>
+                  </Grid>
                 </Grid>
-                <Grid item>
-                  <div
-                    style={{
-                      height: "26px",
-                      width: "26px",
-                      border: "solid 2px white",
-                      backgroundColor: charaUnit?.colorCode,
-                    }}
-                  ></div>
-                </Grid>
-              </Grid>
-            </Grid>
-          </Grid>
-          <Divider style={{ margin: "1% 0" }} />
-          <Grid
-            container
-            direction="row"
-            wrap="nowrap"
-            justify="space-between"
-            alignItems="center"
-          >
-            <Grid item>
-              <Typography variant="subtitle1" style={{ fontWeight: 600 }}>
-                {t("member:skinColorCode")}
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Grid container spacing={1}>
-                <Grid item>
-                  <Typography>{charaUnit?.skinColorCode}</Typography>
-                </Grid>
-                <Grid item>
-                  <div
-                    style={{
-                      height: "26px",
-                      width: "26px",
-                      border: "solid 2px white",
-                      backgroundColor: charaUnit?.skinColorCode,
-                    }}
-                  ></div>
-                </Grid>
-              </Grid>
-            </Grid>
-          </Grid>
-          <Divider style={{ margin: "1% 0" }} />
-          <Grid
-            container
-            direction="row"
-            wrap="nowrap"
-            justify="space-between"
-            alignItems="center"
-          >
-            <Grid item>
-              <Typography variant="subtitle1" style={{ fontWeight: 600 }}>
-                {t("member:skinShadowColorCode1")}
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Grid container spacing={1}>
-                <Grid item>
-                  <Typography>{charaUnit?.skinShadowColorCode1}</Typography>
-                </Grid>
-                <Grid item>
-                  <div
-                    style={{
-                      height: "26px",
-                      width: "26px",
-                      border: "solid 2px white",
-                      backgroundColor: charaUnit?.skinShadowColorCode1,
-                    }}
-                  ></div>
-                </Grid>
-              </Grid>
-            </Grid>
-          </Grid>
-          <Divider style={{ margin: "1% 0" }} />
-          <Grid
-            container
-            direction="row"
-            wrap="nowrap"
-            justify="space-between"
-            alignItems="center"
-          >
-            <Grid item>
-              <Typography variant="subtitle1" style={{ fontWeight: 600 }}>
-                {t("member:skinShadowColorCode2")}
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Grid container spacing={1}>
-                <Grid item>
-                  <Typography>{charaUnit?.skinShadowColorCode2}</Typography>
-                </Grid>
-                <Grid item>
-                  <div
-                    style={{
-                      height: "26px",
-                      width: "26px",
-                      border: "solid 2px white",
-                      backgroundColor: charaUnit?.skinShadowColorCode2,
-                    }}
-                  ></div>
-                </Grid>
-              </Grid>
-            </Grid>
-          </Grid>
-          <Divider style={{ margin: "1% 0" }} />
+                <Divider style={{ margin: "1% 0" }} />
+              </Fragment>
+            ) : null
+          )}
         </Grid>
       </Container>
       <Typography variant="h6" className={layoutClasses.header}>
@@ -379,235 +376,29 @@ const MemberDetail: React.FC<{ contentTransMode: ContentTransModeType }> = ({
       </Typography>
       <Container className={layoutClasses.content} maxWidth="sm">
         <Grid className={classes["grid-out"]} container direction="column">
-          <Grid
-            container
-            direction="row"
-            wrap="nowrap"
-            justify="space-between"
-            alignItems="center"
-          >
-            <Typography variant="subtitle1" style={{ fontWeight: 600 }}>
-              {t("member:height")}
-            </Typography>
-            <Typography>{charaProfile.height}</Typography>
-          </Grid>
-          <Divider style={{ margin: "1% 0" }} />
-          <Grid
-            container
-            direction="row"
-            wrap="nowrap"
-            justify="space-between"
-            alignItems="center"
-          >
-            <Typography variant="subtitle1" style={{ fontWeight: 600 }}>
-              {t("member:birthday")}
-            </Typography>
-            <Typography>{charaProfile.birthday}</Typography>
-          </Grid>
-          <Divider style={{ margin: "1% 0" }} />
-          {charaProfile.characterVoice ? (
-            <Fragment>
-              <Grid
-                container
-                direction="row"
-                wrap="nowrap"
-                justify="space-between"
-                alignItems="center"
-              >
-                <Grid item xs={2}>
-                  <Typography variant="subtitle1" style={{ fontWeight: 600 }}>
-                    {t("member:characterVoice")}
-                  </Typography>
-                </Grid>
-                <Grid item xs={6} md={8}>
-                  <Grid container justify="flex-end">
-                    <Typography>{charaProfile.characterVoice}</Typography>
+          {profileItems.map(({ caption, key }) =>
+            charaProfile[key] ? (
+              <Fragment key={"profile-" + key}>
+                <Grid
+                  container
+                  direction="row"
+                  wrap="nowrap"
+                  justify="space-between"
+                  alignItems="center"
+                >
+                  <Grid item xs={2}>
+                    <Typography variant="subtitle1" style={{ fontWeight: 600 }}>
+                      {t(caption)}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6} md={8} container justify="flex-end">
+                    <Typography>{charaProfile[key]}</Typography>
                   </Grid>
                 </Grid>
-              </Grid>
-              <Divider style={{ margin: "1% 0" }} />
-            </Fragment>
-          ) : null}
-          {charaProfile.school ? (
-            <Fragment>
-              <Grid
-                container
-                direction="row"
-                wrap="nowrap"
-                justify="space-between"
-                alignItems="center"
-              >
-                <Grid item xs={2}>
-                  <Typography variant="subtitle1" style={{ fontWeight: 600 }}>
-                    {t("member:school")}
-                  </Typography>
-                </Grid>
-                <Grid item xs={6} md={8}>
-                  <Grid container justify="flex-end">
-                    <Typography>{charaProfile.school}</Typography>
-                  </Grid>
-                </Grid>
-              </Grid>
-              <Divider style={{ margin: "1% 0" }} />
-            </Fragment>
-          ) : null}
-          {charaProfile.schoolYear ? (
-            <Fragment>
-              <Grid
-                container
-                direction="row"
-                wrap="nowrap"
-                justify="space-between"
-                alignItems="center"
-              >
-                <Grid item xs={2}>
-                  <Typography variant="subtitle1" style={{ fontWeight: 600 }}>
-                    {t("member:schoolYear")}
-                  </Typography>
-                </Grid>
-                <Grid item xs={6} md={8}>
-                  <Grid container justify="flex-end">
-                    <Typography>{charaProfile.schoolYear}</Typography>
-                  </Grid>
-                </Grid>
-              </Grid>
-              <Divider style={{ margin: "1% 0" }} />
-            </Fragment>
-          ) : null}
-          {charaProfile.hobby ? (
-            <Fragment>
-              <Grid
-                container
-                direction="row"
-                wrap="nowrap"
-                justify="space-between"
-                alignItems="center"
-              >
-                <Grid item xs={2}>
-                  <Typography variant="subtitle1" style={{ fontWeight: 600 }}>
-                    {t("member:hobby")}
-                  </Typography>
-                </Grid>
-                <Grid item xs={6} md={8}>
-                  <Grid container justify="flex-end">
-                    <Typography>{charaProfile.hobby}</Typography>
-                  </Grid>
-                </Grid>
-              </Grid>
-              <Divider style={{ margin: "1% 0" }} />
-            </Fragment>
-          ) : null}
-          {charaProfile.specialSkill ? (
-            <Fragment>
-              <Grid
-                container
-                direction="row"
-                wrap="nowrap"
-                justify="space-between"
-                alignItems="center"
-              >
-                <Grid item xs={2}>
-                  <Typography variant="subtitle1" style={{ fontWeight: 600 }}>
-                    {t("member:specialSkill")}
-                  </Typography>
-                </Grid>
-                <Grid item xs={6} md={8}>
-                  <Grid container justify="flex-end">
-                    <Typography>{charaProfile.specialSkill}</Typography>
-                  </Grid>
-                </Grid>
-              </Grid>
-              <Divider style={{ margin: "1% 0" }} />
-            </Fragment>
-          ) : null}
-          {charaProfile.favoriteFood ? (
-            <Fragment>
-              <Grid
-                container
-                direction="row"
-                wrap="nowrap"
-                justify="space-between"
-                alignItems="center"
-              >
-                <Grid item xs={2}>
-                  <Typography variant="subtitle1" style={{ fontWeight: 600 }}>
-                    {t("member:favoriteFood")}
-                  </Typography>
-                </Grid>
-                <Grid item xs={6} md={8}>
-                  <Grid container justify="flex-end">
-                    <Typography>{charaProfile.favoriteFood}</Typography>
-                  </Grid>
-                </Grid>
-              </Grid>
-              <Divider style={{ margin: "1% 0" }} />
-            </Fragment>
-          ) : null}
-          {charaProfile.hatedFood ? (
-            <Fragment>
-              <Grid
-                container
-                direction="row"
-                wrap="nowrap"
-                justify="space-between"
-                alignItems="center"
-              >
-                <Grid item xs={2}>
-                  <Typography variant="subtitle1" style={{ fontWeight: 600 }}>
-                    {t("member:hatedFood")}
-                  </Typography>
-                </Grid>
-                <Grid item xs={6} md={8}>
-                  <Grid container justify="flex-end">
-                    <Typography>{charaProfile.hatedFood}</Typography>
-                  </Grid>
-                </Grid>
-              </Grid>
-              <Divider style={{ margin: "1% 0" }} />
-            </Fragment>
-          ) : null}
-          {charaProfile.weak ? (
-            <Fragment>
-              <Grid
-                container
-                direction="row"
-                wrap="nowrap"
-                justify="space-between"
-                alignItems="center"
-              >
-                <Grid item xs={2}>
-                  <Typography variant="subtitle1" style={{ fontWeight: 600 }}>
-                    {t("member:weak")}
-                  </Typography>
-                </Grid>
-                <Grid item xs={6} md={8}>
-                  <Grid container justify="flex-end">
-                    <Typography>{charaProfile.weak}</Typography>
-                  </Grid>
-                </Grid>
-              </Grid>
-              <Divider style={{ margin: "1% 0" }} />
-            </Fragment>
-          ) : null}
-          <Grid
-            container
-            direction="row"
-            wrap="nowrap"
-            justify="space-between"
-            alignItems="center"
-          >
-            <Grid item xs={2}>
-              <Typography variant="subtitle1" style={{ fontWeight: 600 }}>
-                {t("member:introduction")}
-              </Typography>
-            </Grid>
-            <Grid item xs={6} md={8}>
-              <Grid container justify="flex-end">
-                <Typography>{charaProfile.introduction}</Typography>
-              </Grid>
-            </Grid>
-          </Grid>
-          <Divider style={{ margin: "1% 0" }} />
+                <Divider style={{ margin: "1% 0" }} />
+              </Fragment>
+            ) : null
+          )}
         </Grid>
       </Container>
       {charaSupportUnits.length ? (
@@ -618,7 +409,7 @@ const MemberDetail: React.FC<{ contentTransMode: ContentTransModeType }> = ({
           <Container className={layoutClasses.content} maxWidth="sm">
             <Grid className={classes["grid-out"]} container direction="column">
               {charaSupportUnits.map((csu) => (
-                <Fragment>
+                <Fragment key={"support-unit-" + csu.id}>
                   <Grid
                     container
                     direction="row"
@@ -653,7 +444,7 @@ const MemberDetail: React.FC<{ contentTransMode: ContentTransModeType }> = ({
           spacing={2}
         >
           {charaCards.map((cc) => (
-            <Grid item xs={4} md={2} lg={1}>
+            <Grid key={"card-" + cc.id} item xs={4} md={2} lg={1}>
               <Link to={"/card/" + cc.id} style={{ textDecoration: "none" }}>
                 <CardThumb id={cc.id}></CardThumb>
               </Link>
@@ -682,7 +473,7 @@ const MemberDetail: React.FC<{ contentTransMode: ContentTransModeType }> = ({
     </Fragment>
   ) : (
     <div>
-      Loading... If you saw this for a while, memebr {charaId} does not exist.
+      Loading... If you saw this for a while, member {charaId} does not exist.
     </div>
   );
 };
