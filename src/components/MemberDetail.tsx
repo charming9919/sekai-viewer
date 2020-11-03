@@ -417,27 +417,29 @@ const MemberDetail: React.FC<{ contentTransMode: ContentTransModeType }> = ({
             {t("common:support_unit")}
           </Typography>
           <Container className={layoutClasses.content} maxWidth="sm">
-            <Grid className={classes["grid-out"]} container direction="column">
+            <Grid
+              className={classes["grid-out"]}
+              container
+              direction="row"
+              spacing={1}
+            >
               {charaSupportUnits.map((csu) => (
-                <Fragment key={"support-unit-" + csu.id}>
-                  <Grid
-                    container
-                    direction="row"
-                    wrap="nowrap"
-                    justify="space-between"
-                    alignItems="center"
-                  >
-                    <Typography variant="subtitle1" style={{ fontWeight: 600 }}>
-                      {t("common:unit")}
-                    </Typography>
-                    <img
-                      className={classes["unit-logo-img"]}
-                      src={UnitLogoMap[csu.unit]}
-                      alt={csu.unit}
-                    ></img>
-                  </Grid>
-                  <Divider style={{ margin: "1% 0" }} />
-                </Fragment>
+                <Grid
+                  key={"support-unit-" + csu.id}
+                  item
+                  xs={12}
+                  sm={6}
+                  md={4}
+                  container
+                  alignItems="center"
+                  justify="center"
+                >
+                  <img
+                    className={classes["unit-logo-img"]}
+                    src={UnitLogoMap[csu.unit]}
+                    alt={csu.unit}
+                  ></img>
+                </Grid>
               ))}
             </Grid>
           </Container>
