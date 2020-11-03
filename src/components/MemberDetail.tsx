@@ -312,7 +312,15 @@ const MemberDetail: React.FC<{ contentTransMode: ContentTransModeType }> = ({
             <Typography variant="subtitle1" style={{ fontWeight: 600 }}>
               {t("member:gender.caption")}
             </Typography>
-            <Typography>{t(`member:gender.${chara.gender}`)}</Typography>
+            <Typography>
+              {
+                // for i18next-parser
+                // t("member:gender.female")
+                // t("member:gender.male")
+                // t("member:gender.secret")
+                t(`member:gender.${chara.gender}`)
+              }
+            </Typography>
           </Grid>
           <Divider style={{ margin: "1% 0" }} />
           <Grid

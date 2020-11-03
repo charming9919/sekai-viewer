@@ -22,6 +22,9 @@
   "name": "",
   "hiragana": "",
   "gender": {
-    "caption": ""
+    "caption": "",
+    "female": "",
+    "male": "",
+    "secret": ""
   }
 }
