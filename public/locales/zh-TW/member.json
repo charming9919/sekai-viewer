@@ -1,18 +1,4 @@
 {
-  "tab": {
-    "title[0]": "",
-    "title[1]": "",
-    "title[2]": ""
-  },
-  "name": "",
-  "hiragana": "",
-  "gender": {
-    "caption": ""
-  },
-  "colorCode": "",
-  "skinColorCode": "",
-  "skinShadowColorCode1": "",
-  "skinShadowColorCode2": "",
   "height": "",
   "birthday": "",
   "characterVoice": "",
@@ -23,5 +9,19 @@
   "favoriteFood": "",
   "hatedFood": "",
   "weak": "",
-  "introduction": ""
+  "introduction": "",
+  "colorCode": "",
+  "skinColorCode": "",
+  "skinShadowColorCode1": "",
+  "skinShadowColorCode2": "",
+  "tab": {
+    "title[0]": "",
+    "title[1]": "",
+    "title[2]": ""
+  },
+  "name": "",
+  "hiragana": "",
+  "gender": {
+    "caption": ""
+  }
 }
