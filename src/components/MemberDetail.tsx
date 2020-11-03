@@ -131,7 +131,7 @@ const useStyle = makeStyles((theme) => ({
     padding: theme.spacing("1%", "0"),
   },
   "unit-logo-img": {
-    maxWidth: "128px",
+    height: "64px",
   },
 }));
 
