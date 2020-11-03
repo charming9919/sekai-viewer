@@ -24,7 +24,7 @@ import {
   ICardInfo,
 } from "../types";
 import { useCachedData, useCharaName } from "../utils";
-import { UnitLogoMap } from "../utils/resources";
+import { UnitOutlinedLogoMap } from "../utils/resources";
 import { CardThumb } from "./subs/CardThumb";
 // import { useAssetI18n } from "../utils/i18n";
 
@@ -335,7 +335,7 @@ const MemberDetail: React.FC<{ contentTransMode: ContentTransModeType }> = ({
             </Typography>
             <img
               className={classes["unit-logo-img"]}
-              src={UnitLogoMap[chara.unit]}
+              src={UnitOutlinedLogoMap[chara.unit]}
               alt={chara.unit}
             ></img>
           </Grid>
@@ -436,7 +436,7 @@ const MemberDetail: React.FC<{ contentTransMode: ContentTransModeType }> = ({
                 >
                   <img
                     className={classes["unit-logo-img"]}
-                    src={UnitLogoMap[csu.unit]}
+                    src={UnitOutlinedLogoMap[csu.unit]}
                     alt={csu.unit}
                   ></img>
                 </Grid>

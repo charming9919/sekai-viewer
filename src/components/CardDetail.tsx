@@ -38,7 +38,7 @@ import rarityNormal from "../assets/rarity_star_normal.png";
 import rarityAfterTraining from "../assets/rarity_star_afterTraining.png";
 
 import { CardThumb } from "./subs/CardThumb";
-import { attrIconMap, UnitLogoMap } from "../utils/resources";
+import { attrIconMap, UnitOutlinedLogoMap } from "../utils/resources";
 import { useTranslation } from "react-i18next";
 import MaterialIcon from "./subs/MaterialIcon";
 import CommonMaterialIcon from "./subs/CommonMaterialIcon";
@@ -159,7 +159,7 @@ const CardDetail: React.FC<{ contentTransMode: ContentTransModeType }> = ({
   const getCharaUnitImage = useCallback(
     (charaId: number) => {
       const chara = charas.find((chara) => chara.id === charaId);
-      return chara ? UnitLogoMap[chara!.unit] : undefined;
+      return chara ? UnitOutlinedLogoMap[chara!.unit] : undefined;
     },
     [charas]
   );
@@ -431,7 +431,7 @@ const CardDetail: React.FC<{ contentTransMode: ContentTransModeType }> = ({
                 </Typography>
                 <img
                   className={classes["unit-logo-img"]}
-                  src={UnitLogoMap[card.supportUnit]}
+                  src={UnitOutlinedLogoMap[card.supportUnit]}
                   alt={card.supportUnit}
                 ></img>
               </Grid>

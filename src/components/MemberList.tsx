@@ -5,7 +5,7 @@ import { Link, useRouteMatch } from "react-router-dom";
 import { useLayoutStyles } from "../styles/layout";
 import { ContentTransModeType } from "../types";
 import { units } from "../utils/units";
-import { UnitLogoMap } from "../utils/resources";
+import { UnitOutlinedLogoMap } from "../utils/resources";
 
 const useStyle = makeStyles((theme) => ({
   unitIcon: {
@@ -43,7 +43,7 @@ const MemberList: React.FC<{ contentTransMode: ContentTransModeType }> = ({
             <Grid item container justify="center">
               <img
                 className={classes.unitIcon}
-                src={UnitLogoMap[id]}
+                src={UnitOutlinedLogoMap[id]}
                 alt={id}
               ></img>
             </Grid>
