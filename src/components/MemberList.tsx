@@ -15,7 +15,7 @@ const useStyle = makeStyles((theme) => ({
     height: "96px",
   },
   memberSelectImg: {
-    width: "100%",
+    height: "300px",
     cursor: "pointer",
   },
 }));
@@ -47,17 +47,23 @@ const MemberList: React.FC<{ contentTransMode: ContentTransModeType }> = ({
                 alt={id}
               ></img>
             </Grid>
-            <Grid item container justify="center" spacing={1}>
+            <Grid item container justify="center" style={{ lineHeight: "0" }}>
               {characters.map((i) => (
-                <Grid key={`chara-${i}`} item xs={3} md={2}>
-                  <Link to={path + "/" + i} style={{ textDecoration: "none" }}>
-                    <img
-                      className={classes.memberSelectImg}
-                      src={`${process.env.REACT_APP_ASSET_DOMAIN}/file/sekai-assets/character/character_select_rip/chr_tl_${i}.webp`}
-                      alt={String(i)}
-                    ></img>
-                  </Link>
-                </Grid>
+                <Link
+                  key={`chara-${i}`}
+                  to={path + "/" + i}
+                  style={{
+                    textDecoration: "none",
+                    marginLeft: i > 0 ? "10px" : "0",
+                    marginBottom: "10px",
+                  }}
+                >
+                  <img
+                    className={classes.memberSelectImg}
+                    src={`${process.env.REACT_APP_ASSET_DOMAIN}/file/sekai-assets/character/character_select_rip/chr_tl_${i}.webp`}
+                    alt={String(i)}
+                  ></img>
+                </Link>
               ))}
             </Grid>
           </Grid>
