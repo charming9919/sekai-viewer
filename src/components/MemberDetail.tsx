@@ -400,7 +400,9 @@ const MemberDetail: React.FC<{ contentTransMode: ContentTransModeType }> = ({
                     </Typography>
                   </Grid>
                   <Grid item xs={6} md={8} container justify="flex-end">
-                    <Typography>{charaProfile[key]}</Typography>
+                    <Typography style={{ textAlign: "justify" }}>
+                      {charaProfile[key]}
+                    </Typography>
                   </Grid>
                 </Grid>
                 <Divider style={{ margin: "1% 0" }} />
@@ -449,10 +451,10 @@ const MemberDetail: React.FC<{ contentTransMode: ContentTransModeType }> = ({
           className={classes["grid-out"]}
           container
           direction="row"
-          spacing={2}
+          spacing={1}
         >
           {charaCards.map((cc) => (
-            <Grid key={"card-" + cc.id} item xs={4} md={2} lg={1}>
+            <Grid key={"card-" + cc.id} item xs={4} sm={3} md={2} lg={1}>
               <Link to={"/card/" + cc.id} style={{ textDecoration: "none" }}>
                 <CardThumb id={cc.id}></CardThumb>
               </Link>
